@@ -14,7 +14,7 @@
 <meta property="og:description" content="小小学习一下">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-07-30T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-07-31T02:35:44.405Z">
+<meta property="article:modified_time" content="2023-09-16T01:30:30.613Z">
 <meta property="article:author" content="Chiong">
 <meta property="article:tag" content="笔记">
 <meta property="article:tag" content="生信">
@@ -67,7 +67,9 @@
 		</script>
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
 	
-<meta name="generator" content="Hexo 6.3.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -181,36 +183,33 @@
 <li>最优子结构：问题的最优解包含子问题的最优解</li>
 <li><em>动态规划</em></li>
 </ul>
-<p>$$
+<script type="math/tex; mode=display">
 \begin{align}
-f(0,0) &amp; &#x3D;  0 \</p>
-<p>f(i,j) &amp; &#x3D;  max
+f(0,0) & =  0 \\
+
+f(i,j) & =  max
     \begin{cases}
-    &amp; f(i-1,j)+d &amp; \text{$x_i$ aligned to gap} \
-    &amp; f(i,j-1)+d &amp; \text{$y_i$ aligned to gap}\
-    &amp; f(i-1,j-1)+s(i,j) &amp; \text{$x_i$ aligned to $y_i$}
+    & f(i-1,j)+d & \text{$x_i$ aligned to gap} \\
+    & f(i,j-1)+d & \text{$y_i$ aligned to gap}\\
+    & f(i-1,j-1)+s(i,j) & \text{$x_i$ aligned to $y_i$}
     \end{cases}
-\end{align}
-$$</p>
-<h2 id="局部动态规划算法：Smith-Waterman"><a href="#局部动态规划算法：Smith-Waterman" class="headerlink" title="局部动态规划算法：Smith-Waterman"></a>局部动态规划算法：Smith-Waterman</h2><ul>
+\end{align}</script><h2 id="局部动态规划算法：Smith-Waterman"><a href="#局部动态规划算法：Smith-Waterman" class="headerlink" title="局部动态规划算法：Smith-Waterman"></a>局部动态规划算法：Smith-Waterman</h2><ul>
 <li>为何使用局部算法？<ul>
 <li>保守序列的存在；</li>
-<li>内含子的发现；
-$$
+<li>内含子的发现；<script type="math/tex; mode=display">
 \begin{align}
-f(0,0) &amp; &#x3D;0\
-f(i,j) &amp; &#x3D;max
-  \begin{cases}
-  &amp; f(i-1,j)+d\
-  &amp; f(i,j-1)+d\
-  &amp; f(i-1,j-1)+s(i,j)\
-  &amp; 0
-  \end{cases}
-\end{align}
-$$</li>
+f(0,0) & =0\\
+f(i,j) & =max
+\begin{cases}
+& f(i-1,j)+d\\
+& f(i,j-1)+d\\
+& f(i-1,j-1)+s(i,j)\\
+& 0
+\end{cases}
+\end{align}</script></li>
 </ul>
 </li>
-<li>区别在于‘0’；<em><strong>0</strong></em>的效果：使得打分可以从序列中的某个位置<em>重启</em>，局部配对分数变得更高</li>
+<li>区别在于‘0’；<strong><em>0</em></strong>的效果：使得打分可以从序列中的某个位置<em>重启</em>，局部配对分数变得更高</li>
 <li>起点终点未必在主对角线两侧，但连线会与主对角线平行</li>
 </ul>
 
