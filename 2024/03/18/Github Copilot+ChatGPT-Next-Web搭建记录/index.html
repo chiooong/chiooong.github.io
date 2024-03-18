@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="服务器：阿里云轻量应用服务器2+2，30M带宽（香港）两年，“云工开物”提供300元优惠+三折（部分高校）。折算下来近似于一千元以内免费。让我们一起感谢阿里云。 Github Copilot 学生申请Github Education三次申请后通过。  学校邮箱； 手持校园卡拍照； approved状态可能持续几天，直到收到邮件（不一定）或approved由绿变紫；  copilot-gpt4-se">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Github Copilot+ChatGPT-Next-Web搭建记录">
+<meta property="og:url" content="https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="Chiong&#39;s Blog🎶">
+<meta property="og:description" content="服务器：阿里云轻量应用服务器2+2，30M带宽（香港）两年，“云工开物”提供300元优惠+三折（部分高校）。折算下来近似于一千元以内免费。让我们一起感谢阿里云。 Github Copilot 学生申请Github Education三次申请后通过。  学校邮箱； 手持校园卡拍照； approved状态可能持续几天，直到收到邮件（不一定）或approved由绿变紫；  copilot-gpt4-se">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://picbed-8tn.pages.dev/img/24_3_18_aliyun.png">
+<meta property="og:image" content="https://picbed-8tn.pages.dev/img/24_3_18_copilot.png">
+<meta property="article:published_time" content="2024-03-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-18T04:35:38.948Z">
+<meta property="article:author" content="Chiong">
+<meta property="article:tag" content="GPT">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picbed-8tn.pages.dev/img/24_3_18_aliyun.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/android-chrome-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Github Copilot+ChatGPT-Next-Web搭建记录</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/02/25/nohup%20...%20&%20%E9%80%80%E5%87%BA%E7%BB%88%E7%AB%AF%E5%90%8E%E6%9C%AA%E8%83%BD%E7%BB%A7%E7%BB%AD%E6%9C%8D%E5%8A%A1/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/&text=Github Copilot+ChatGPT-Next-Web搭建记录"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/&title=Github Copilot+ChatGPT-Next-Web搭建记录"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/&is_video=false&description=Github Copilot+ChatGPT-Next-Web搭建记录"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Github Copilot+ChatGPT-Next-Web搭建记录&body=Check out this article: https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/&title=Github Copilot+ChatGPT-Next-Web搭建记录"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/&title=Github Copilot+ChatGPT-Next-Web搭建记录"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/&title=Github Copilot+ChatGPT-Next-Web搭建记录"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/&title=Github Copilot+ChatGPT-Next-Web搭建记录"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/&name=Github Copilot+ChatGPT-Next-Web搭建记录&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/&t=Github Copilot+ChatGPT-Next-Web搭建记录"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9A%E9%98%BF%E9%87%8C%E4%BA%91"><span class="toc-number">1.</span> <span class="toc-text">服务器：阿里云</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Github-Copilot-%E5%AD%A6%E7%94%9F%E7%94%B3%E8%AF%B7"><span class="toc-number">2.</span> <span class="toc-text">Github Copilot 学生申请</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#copilot-gpt4-service%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">copilot-gpt4-service配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85docker-ce"><span class="toc-number">3.1.</span> <span class="toc-text">安装docker-ce</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%B9%B6%E8%BF%90%E8%A1%8C-copilot-gpt4-service-%E6%9C%8D%E5%8A%A1"><span class="toc-number">3.2.</span> <span class="toc-text">安装并运行 copilot-gpt4-service 服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96token"><span class="toc-number">3.3.</span> <span class="toc-text">获取token</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%AE%A2%E6%88%B7%E7%AB%AF-ChatGPT-Next-Web"><span class="toc-number">4.</span> <span class="toc-text">配置客户端 ChatGPT-Next-Web</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Github Copilot+ChatGPT-Next-Web搭建记录
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Chiong</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-03-17T16:00:00.000Z" class="dt-published" itemprop="datePublished">2024-03-18</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/GPT/" rel="tag">GPT</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h3 id="服务器：阿里云"><a href="#服务器：阿里云" class="headerlink" title="服务器：阿里云"></a>服务器：阿里云</h3><p>轻量应用服务器2+2，30M带宽（香港）两年，<br>“云工开物”提供300元优惠+三折（部分高校）。折算下来近似于一千元以内免费。<br>让我们一起感谢阿里云。<br><img src="https://picbed-8tn.pages.dev/img/24_3_18_aliyun.png" alt="end"></p>
+<h3 id="Github-Copilot-学生申请"><a href="#Github-Copilot-学生申请" class="headerlink" title="Github Copilot 学生申请"></a>Github Copilot 学生申请</h3><p><a target="_blank" rel="noopener" href="https://education.github.com/discount_requests/application">Github Education</a><br>三次申请后通过。<br><img src="https://picbed-8tn.pages.dev/img/24_3_18_copilot.png" alt="end"></p>
+<ul>
+<li><strong><em>学校邮箱</em></strong>；</li>
+<li>手持校园卡拍照；</li>
+<li><em>approved</em>状态可能持续几天，直到收到邮件（不一定）或<em>approved</em>由绿变<strong>紫</strong>；</li>
+</ul>
+<h3 id="copilot-gpt4-service配置"><a href="#copilot-gpt4-service配置" class="headerlink" title="copilot-gpt4-service配置"></a>copilot-gpt4-service配置</h3><h4 id="安装docker-ce"><a href="#安装docker-ce" class="headerlink" title="安装docker-ce"></a>安装docker-ce</h4><p>服务器为Ubuntu22.04，直接apt安装并不可行。  </p>
+<p>首先，更新现有包列表：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update </span><br></pre></td></tr></table></figure>
+<p>安装几个依赖包，让apt可以支持HTTPS：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install apt-transport-https ca-certificates curl software-properties-common </span><br></pre></td></tr></table></figure>
+<p>将官方Docker库的GPG公钥添加到系统中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - </span><br></pre></td></tr></table></figure>
+<p>将Docker库添加到APT里：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable&quot; </span><br></pre></td></tr></table></figure>
+<p>再次更新现有包列表</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update </span><br></pre></td></tr></table></figure>
+<p>为了确保修改生效，让新的安装从Docker库里获取，而不是从Ubuntu自己的库里获取，执行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-cache policy docker-ce</span><br></pre></td></tr></table></figure>
+<p>可能会看到如下图的输出，各个系统的情况可能略有不同。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker-ce:</span><br><span class="line">  Installed: (none)</span><br><span class="line">  Candidate: 5:19.03.9~3-0~ubuntu-focal</span><br><span class="line">  Version table:</span><br><span class="line">     5:19.03.9~3-0~ubuntu-focal 500</span><br><span class="line">        500 Index of linux/ubuntu/ focal/stable amd64 Packages</span><br></pre></td></tr></table></figure>
+<p>开始安装吧：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install docker-ce </span><br></pre></td></tr></table></figure>
+<p>现在Docker应该已经安装好了，守护进程也开启了，开机启动也开启了。我们看看Docker的运行状态吧。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl status docker </span><br></pre></td></tr></table></figure>
+<p>你看到的输出应该是这样的:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">output:</span><br><span class="line"> docker.service - Docker Application Container Engine</span><br><span class="line">     Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor prese&gt;</span><br><span class="line">     Active: active (running) since Mon 2024-03-18 10:21:31 CST; 20min ago</span><br><span class="line">TriggeredBy: ● docker.socket</span><br><span class="line">       Docs: https://docs.docker.com</span><br><span class="line">   Main PID: 59919 (dockerd)</span><br><span class="line">      Tasks: 9</span><br><span class="line">     Memory: 30.0M</span><br><span class="line">        CPU: 614ms</span><br><span class="line">     CGroup: /system.slice/docker.service</span><br><span class="line">             └─59919 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/co&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="安装并运行-copilot-gpt4-service-服务"><a href="#安装并运行-copilot-gpt4-service-服务" class="headerlink" title="安装并运行 copilot-gpt4-service 服务"></a>安装并运行 copilot-gpt4-service 服务</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">  --name copilot-gpt4-service \</span><br><span class="line">  --restart always \</span><br><span class="line">  -p 8080:8080 \</span><br><span class="line">  -e HOST=0.0.0.0 \</span><br><span class="line">  aaamoon/copilot-gpt4-service:latest</span><br></pre></td></tr></table></figure>
+<p>启动在端口8080<br><strong><em>Attention!别忘了在阿里云开放8080端口！！！！！</em></strong></p>
+<h4 id="获取token"><a href="#获取token" class="headerlink" title="获取token"></a>获取token</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/aaamoon/copilot-gpt4-service/master/shells/get_copilot_token.sh)&quot;</span><br></pre></td></tr></table></figure>
+<p>获得了ghu_开头的token</p>
+<h3 id="配置客户端-ChatGPT-Next-Web"><a href="#配置客户端-ChatGPT-Next-Web" class="headerlink" title="配置客户端 ChatGPT-Next-Web"></a>配置客户端 ChatGPT-Next-Web</h3><p><a href="https%3A//github.com/ChatGPTNextWeb/ChatGPT-Next-Web">ChatGPT-Next-Web</a></p>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/tags/">tags</a></li>
+        
+          <li><a href="/categories/">categories</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9A%E9%98%BF%E9%87%8C%E4%BA%91"><span class="toc-number">1.</span> <span class="toc-text">服务器：阿里云</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Github-Copilot-%E5%AD%A6%E7%94%9F%E7%94%B3%E8%AF%B7"><span class="toc-number">2.</span> <span class="toc-text">Github Copilot 学生申请</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#copilot-gpt4-service%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">copilot-gpt4-service配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85docker-ce"><span class="toc-number">3.1.</span> <span class="toc-text">安装docker-ce</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%B9%B6%E8%BF%90%E8%A1%8C-copilot-gpt4-service-%E6%9C%8D%E5%8A%A1"><span class="toc-number">3.2.</span> <span class="toc-text">安装并运行 copilot-gpt4-service 服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96token"><span class="toc-number">3.3.</span> <span class="toc-text">获取token</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%AE%A2%E6%88%B7%E7%AB%AF-ChatGPT-Next-Web"><span class="toc-number">4.</span> <span class="toc-text">配置客户端 ChatGPT-Next-Web</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/&text=Github Copilot+ChatGPT-Next-Web搭建记录"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/&title=Github Copilot+ChatGPT-Next-Web搭建记录"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/&is_video=false&description=Github Copilot+ChatGPT-Next-Web搭建记录"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Github Copilot+ChatGPT-Next-Web搭建记录&body=Check out this article: https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/&title=Github Copilot+ChatGPT-Next-Web搭建记录"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/&title=Github Copilot+ChatGPT-Next-Web搭建记录"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/&title=Github Copilot+ChatGPT-Next-Web搭建记录"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/&title=Github Copilot+ChatGPT-Next-Web搭建记录"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/&name=Github Copilot+ChatGPT-Next-Web搭建记录&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://chiooong.github.io/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/&t=Github Copilot+ChatGPT-Next-Web搭建记录"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023-2024
+    Chiong
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'chiooong/comments';
+      var utterances_issue_term = 'title';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>

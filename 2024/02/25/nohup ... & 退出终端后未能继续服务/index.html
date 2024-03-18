@@ -14,7 +14,7 @@
 <meta property="og:description" content="碰上了需要跑很久的脚本（师姐看看你的代码五万细胞一晚上这合理吗）">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-02-24T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-02-25T16:01:56.943Z">
+<meta property="article:modified_time" content="2024-03-18T02:23:30.637Z">
 <meta property="article:author" content="Chiong">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -96,6 +96,8 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" aria-label="Previous post" href="/2024/03/18/Github%20Copilot+ChatGPT-Next-Web%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
         
         <li><a class="icon" aria-label="Next post" href="/2023/11/26/%E6%97%A5%E8%AE%B0-4%EF%BC%9A12%E6%9C%88/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
@@ -173,10 +175,14 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nohup</span> Rscript *.R &amp;</span><br></pre></td></tr></table></figure>
+    <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nohup</span> Rscript *.R &gt;res.out &amp;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>nohup: no hang up</li>
 <li>Rscript: 运行R脚本</li>
+<li><blockquote>
+<p>res.out: 指定输出到res.out文件</p>
+</blockquote>
+</li>
 <li>&amp;: 后台运行</li>
 </ul>
 <p><font color=Blue>不要直接关闭终端！！！</font><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span> </span><br></pre></td></tr></table></figure><br>提示<code>logout</code>后退出</p>
